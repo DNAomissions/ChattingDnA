@@ -4,16 +4,28 @@ const express = require('express');
 const socketIO = require('socket.io');
 const path = require('path');
 
+var router = express.Router();
+
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
-
-const app = require('express')();
-const server = express()
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-
-app.get('/', function (req, res) {
-  res.sendfile(INDEX);
+const LOGIN = path.join(__dirname, 'login.html');
+router.use(function (req,res,next) {
+  console.log("/" + req.method);
+  next();
 });
+
+router.get("/",function(req,res){
+  res.sendFile(INDEX);
+});
+
+router.get("/login",function(req,res){
+  res.sendFile(LOGIN);
+});
+
+const server = express()
+  .use(express.static(path.join(__dirname,'assets')))
+  .use('/',router)
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);
 

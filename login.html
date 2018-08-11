@@ -7,16 +7,16 @@
 
     <!-- Start CSS Module -->
       <!-- Bootstrap -->
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" />
       <!-- FontAwesome -->
-        <link rel="stylesheet" href="assets/fontawesome/css/fontawesome-all.min.css" />
+        <link rel="stylesheet" href="../fontawesome/css/fontawesome-all.min.css" />
       <!-- Animate -->
-        <link rel="stylesheet" href="assets/animate/animate.min.css" />
-        <link rel="stylesheet" href="assets/animate/set.css" />
+        <link rel="stylesheet" href="../animate/animate.min.css" />
+        <link rel="stylesheet" href="../animate/set.css" />
     <!-- End CSS Module -->
     <!-- Module CSS Login -->
-      <link rel="stylesheet" href="assets/login/css/main.css">
-      <link rel="stylesheet" href="assets/login/css/util.css">
+      <link rel="stylesheet" href="../login/css/main.css">
+      <link rel="stylesheet" href="../login/css/util.css">
 
     <style>
       .header-login{
@@ -157,34 +157,32 @@
             </div>
         </div>
     </div>
-    <!-- My JSON File -->
-      <script src="json/member.json" charset="utf-8"></script>
 
     <!-- Start JS Module -->
       <!-- JQuery -->
-        <script src="assets/jquery-3.3.1.min.js"></script>
+        <script src="../jquery-3.3.1.min.js"></script>
       <!-- Popper -->
-        <script src="assets/popper/umd/popper.min.js"></script>
+        <script src="../popper/umd/popper.min.js"></script>
       <!-- Bootstrap -->
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../bootstrap/js/bootstrap.min.js"></script>
       <!-- Wow -->
-        <script src="assets/wow/wow.min.js"></script>
-        <script src="assets/wow/wow-script.js"></script>
+        <script src="../wow/wow.min.js"></script>
+        <script src="../wow/wow-script.js"></script>
       <!-- SweetAlert -->
-        <script src="assets/sweetalert2-all.js"></script>
+        <script src="../sweetalert2-all.js"></script>
       <!-- VueJS -->
-        <script src="assets/vue/vue.min.js"></script>
+        <script src="../vue/vue.min.js"></script>
       <!-- MD5 -->
-        <script src="assets/md5.js" charset="utf-8"></script>
+        <script src="../md5.js" charset="utf-8"></script>
       <!-- JQuery Cookies -->
-        <script src="assets/js.cookie.js" charset="utf-8"></script>
+        <script src="../js.cookie.js" charset="utf-8"></script>
       <!-- Module JS Login -->
-       <script src="assets/login/js/main.js" charset="utf-8"></script>
+       <script src="../login/js/main.js" charset="utf-8"></script>
        <script type="text/javascript">
        if(Cookies.get("id") != null && Cookies.get("name") != null && Cookies.get("email") != null){
-          window.location = "index.html";
+          window.location = "../";
        }else{
-          var members = $.getJSON("json/member.json",function(result){
+          var members = $.getJSON("../json/member.json",function(result){
             $.getJSON('https://ipapi.co/json/',function(ippublic){
 
             });
@@ -196,6 +194,6 @@
           });
         }
        </script>
-       <script src="assets/login/js/login-vue.js" charset="utf-8"></script>
+       <script src="../login/js/login-vue.js" charset="utf-8"></script>
   </body>
 </html>
