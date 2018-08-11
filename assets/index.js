@@ -1,4 +1,4 @@
-var socket = io.connect('https://'+window.location.hostname+':3000',{ query: "name="+Cookies.get("name") });
+var socket = io.connect(window.location.protocol+'//'+window.location.hostname+':3000',{ query: "name="+Cookies.get("name") });
 
 $(document).ready(function(){
   socket.on('chat message', function(msg){
