@@ -6,7 +6,7 @@ const path = require('path');
 
 var router = express.Router();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 const LOGIN = path.join(__dirname, 'login.html');
 router.use(function (req,res,next) {
