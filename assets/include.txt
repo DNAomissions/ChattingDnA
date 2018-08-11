@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <title></title>
+
+    <!-- Start CSS Module -->
+      <!-- Bootstrap -->
+        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+      <!-- FontAwesome -->
+        <link rel="stylesheet" href="assets/fontawesome/css/fontawesome-all.min.css" />
+      <!-- Animate -->
+        <link rel="stylesheet" href="assets/animate/animate.min.css" />
+        <link rel="stylesheet" href="assets/animate/set.css" />
+      <!-- DataTable -->
+        <link rel="stylesheet" href="assets/datatable/css/dataTables.bootstrap4.min.css" />
+      <!-- DatePicker -->
+        <link rel="stylesheet" href="assets/datepicker/css/bootstrap/zebra_datepicker.min.css" />
+    <!-- End CSS Module -->
+
+  </head>
+  <body>
+
+    <!-- Start JS Module -->
+      <!-- JQuery -->
+        <script src="assets/jquery-3.3.1.min.js"></script>
+      <!-- Popper -->
+        <script src="assets/popper/umd/popper.min.js"></script>
+      <!-- Bootstrap -->
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+      <!-- Wow -->
+        <script src="assets/wow/wow.min.js"></script>
+        <script src="assets/wow/script.js"></script>
+      <!-- SweetAlert -->
+        <script src="assets/sweetalert2-all.js"></script>
+      <!-- DataTable -->
+        <script src="assets/datatable/js/jquery.dataTables.min.js"></script>
+        <script src="assets/datatable/js/dataTables.bootstrap4.min.js"></script>
+      <!-- DatePicker -->
+        <script src="assets/datepicker/zebra_datepicker.min.js"></script>
+      <!-- VueJS -->
+        <script src="assets/vue/vue.min.js"></script>
+    <!-- End JS Module -->
+  </body>
+</html>

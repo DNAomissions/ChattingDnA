@@ -1,0 +1,6 @@
+{
+  "name": "Chatting DnA",
+  "description": "Just for Fun",
+  "repository": "https://github.com/DnAomissions/chatting-dna",
+  "keywords": ["node", "websocket", "socket.io"]
+}

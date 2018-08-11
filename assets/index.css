@@ -1,0 +1,107 @@
+/***********************************************
+ *  Live Chat Application Style
+ *  By : Daniel Dwi Fortuna (DnAomissions)
+ ***********************************************
+ */
+body {
+    background-color: #ebebeb;
+}
+
+.chat-box-field{
+  background-color: white;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+  display: block;
+  padding: 10px;
+  max-height: 100px;
+}
+
+#chat-message{
+  resize: none;
+}
+
+.chatResult{
+  bottom:100px;
+  margin: 0;
+  top:50px;
+  padding-top: 10px;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:50px;
+  margin-bottom: 100px;
+  list-style-type: none;
+}
+
+/* Bubble Chat */
+.speech-bubble-right {
+  margin-top:10px;
+  position: relative;
+  background: #56e4e4;
+  padding: 10px 10px;
+  border-radius: .4em;
+}
+
+.speech-bubble-right:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 0.7em solid transparent;
+  border-left-color: #56e4e4;
+  border-right: 0;
+  margin-top: -0.7em;
+  margin-right: -0.7em;
+}
+
+.speech-bubble-left {
+  margin-top:10px;
+  position: relative;
+  background: #76eb1a;
+  padding: 10px 10px;
+  border-radius: .4em;
+}
+
+.speech-bubble-left:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 0.7em solid transparent;
+  border-right-color: #76eb1a;
+  border-left: 0;
+  margin-top: -0.7em;
+  margin-left: -0.7em;
+}
+
+.time-chat {
+  display: inline;
+  float : right;
+  bottom:0;
+  font-size : 0.8em;
+}
+
+.sender-chat {
+  display: inline-block;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  font-size: 1.1em;
+}
+
+.divider-chat-bubble {
+  content: ' ';
+  position: relative;
+  width:100%;
+  display: block;
+  border-bottom: 2px solid whitesmoke;
+}
+
+.message-chat {
+  padding : 0 10px;
+  font-size : 0.9em;
+}
