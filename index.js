@@ -1,8 +1,7 @@
-var socket = io();
+var socket = io.connect(window.location.protocol+'//'+window.location.hostname+':3000',{ query: "name="+Cookies.get("name") });
 
 $(document).ready(function(){
   socket.on('chat message', function(msg){
-    console.log(msg);
     if(msg.from == Cookies.get("name")){
       $('#chatResult').append(`<li class="wowload fadeIn speech-bubble-right"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;"><span class="sender-chat">`+msg.from+`</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat">`+msg.time+`</span></pre></li>`);
     }else{
