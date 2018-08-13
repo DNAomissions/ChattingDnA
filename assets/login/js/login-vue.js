@@ -78,6 +78,7 @@ var formRegister = new Vue({
                 }
               }];
 
+              auth = member[0];
               membersResult = member;
             }else{
               member = {
@@ -92,7 +93,7 @@ var formRegister = new Vue({
                   remember : false
                 }
               };
-
+              auth = member;
               membersResult[id] = member;
             }
 
@@ -108,9 +109,9 @@ var formRegister = new Vue({
                   type:'PUT',
                   url:'../json/member.json/',
                   success: function(result){
-                    Cookies.set("id",member.id)
-                    Cookies.set("name",member.name)
-                    Cookies.set("email",member.email)
+                    Cookies.set("id",auth.id)
+                    Cookies.set("name",auth.name)
+                    Cookies.set("email",auth.email)
                     location.reload()
                   }
                 })
@@ -173,18 +174,22 @@ var formLogin = new Vue({
       }
     },
     loginValidate : function(){
-      console.log(JSON.stringify(members.responseJSON));
-      var resultEmail = this.searchEmail(this.email)
+      if(members.responseJSON != null){
+        console.log(JSON.stringify(members.responseJSON));
+        var resultEmail = this.searchEmail(this.email)
 
-      console.log(resultEmail)
-      if(resultEmail.length > 0){
-        if(resultEmail[0].password == md5(this.password)){
-          this.authLogin(resultEmail[0])
+        console.log(resultEmail)
+        if(resultEmail.length > 0){
+          if(resultEmail[0].password == md5(this.password)){
+            this.authLogin(resultEmail[0])
+          }else{
+            swal('Wrong!','Wrong password!','error')
+          }
         }else{
-          swal('Wrong!','Wrong password!','error')
+          swal('Wrong!','Email not found!','error')
         }
       }else{
-        swal('Wrong!','Email not found!','error')
+        swal('Alert!','Please Sign Up!','warning')
       }
     },
     searchEmail : function(email){
