@@ -12,7 +12,6 @@ var formRegister = new Vue({
   mounted : function(){
     $.getJSON("../json/member.json",function(result){
       this.members = JSON.stringify(result)
-      console.log(this.members)
     }).fail(function(){
       this.members = this.members
     });
@@ -98,15 +97,10 @@ var formRegister = new Vue({
             }
 
             this.members = JSON.stringify(membersResult)
-            console.log(JSON.stringify(membersResult));
-            console.log(this.members);
             $.ajax({
               type:'DELETE',
               url:'../json/member.json',
               success: function(result){
-                console.log("success delete");
-                console.log(JSON.stringify(membersResult));
-                console.log(this.members);
                 $.ajax({
                   data : {
                     json : JSON.stringify(membersResult)
@@ -114,7 +108,10 @@ var formRegister = new Vue({
                   type:'PUT',
                   url:'../json/member.json/',
                   success: function(result){
-                    console.log("success add");
+                    Cookies.set("id",member.id)
+                    Cookies.set("name",member.name)
+                    Cookies.set("email",member.email)
+                    location.reload()
                   }
                 })
               }
