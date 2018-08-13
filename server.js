@@ -2,16 +2,52 @@
 
 const express = require('express');
 const socketIO = require('socket.io');
+const fs = require('fs');
 const path = require('path');
+const bodyParser = require('body-parser')
 
-var router = express.Router();
+
+const router = express.Router();
 
 const PORT = process.env.PORT || 3000;
 const INDEX = path.join(__dirname, 'index.html');
 const LOGIN = path.join(__dirname, 'login.html');
+const MEMBER = path.join(__dirname, 'assets/json/member.json');
+
 router.use(function (req,res,next) {
   console.log("/" + req.method);
   next();
+})
+.use(bodyParser.urlencoded({ extended: false }))
+.use(bodyParser.json());
+
+router.delete("/json/member.json",function(req,res){
+  if(fs.existsSync(MEMBER)){
+    fs.unlink(MEMBER, function (err) {
+      if(err){
+        console.log('Error : '+err);
+      }else{
+        console.log('File member.json deleted!');
+      }
+    });
+    res.send('Success Delete!');
+  }else{
+    console.log("File doestn't Exist!");
+    res.send("File doestn't Exist!");
+  }
+});
+
+router.put("/json/member.json",function(req,res){
+  fs.writeFile(MEMBER, req.body.json, function (err) {
+    if(err){
+      console.log('Error : '+err);
+    }else{
+      console.log('File member.json Created!');
+    }
+    console.log('Saved!');
+    res.send('Success Delete!');
+  });
+  console.log(req.body.json);
 });
 
 router.get("/",function(req,res){
@@ -22,9 +58,12 @@ router.get("/login",function(req,res){
   res.sendFile(LOGIN);
 });
 
+
+
 const server = express()
   .use(express.static(path.join(__dirname,'assets')))
   .use('/',router)
+  .use(bodyParser.json())
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);

@@ -1,3 +1,162 @@
+var formRegister = new Vue({
+  el : '#formRegister',
+  data : {
+    name : '',
+    email : '',
+    password : '',
+    passwordConfirm : '',
+    validateConfirm : false,
+    validateEmailResult : false,
+    members : this.members
+  },
+  mounted : function(){
+    $.getJSON("../json/member.json",function(result){
+      this.members = JSON.stringify(result)
+      console.log(this.members)
+    }).fail(function(){
+      this.members = this.members
+    });
+    this.validateCPassword()
+  },
+  methods : {
+    validateCPassword : function(){
+      if(this.password.length >= 6){
+        $('#cpassword-validate').attr('data-validate','Enter Confirm Password')
+        if(this.password != this.passwordConfirm){
+          $('#cpassword-validate').addClass('alert-validate').removeClass('alert-validate-success')
+          this.validateConfirm = false
+        }else{
+          $('#cpassword-validate').removeClass('alert-validate').addClass('alert-validate-success')
+          this.validateConfirm = true
+        }
+      }else{
+        $('#cpassword-validate').attr('data-validate','Minimal 6 Character')
+        $('#cpassword-validate').addClass('alert-validate').removeClass('alert-validate-success')
+        this.validateConfirm = false
+      }
+    },
+    registerMembers : function(){
+      if(this.validateConfirm == true){
+        var inputR = $('#formRegister .validate-input .input100');
+        var check = true;
+
+        for(var i=0; i<inputR.length; i++) {
+            if(this.validate(inputR[i]) == false){
+                this.showValidate(inputR[i]);
+                check=false;
+            }
+        }
+
+        if(check == true){
+          if(this.validateEmailResult == true){
+            var membersResult = [];
+            if(this.members !=null ){
+              if(this.members.responseJSON == null){
+                membersResult = this.members
+              }else{
+                membersResult = this.members.responseJSON
+              }
+            }
+
+            console.log(this.members);
+            var id=0;
+            var member;
+            if(membersResult.length != null){
+              id = membersResult.length;
+            }
+
+            if(id==0){
+              member = [{
+                id :id+1,
+                email : this.email,
+                name : this.name,
+                password : md5(this.password),
+                status : false,
+                setting : {
+                  ip : null,
+                  status : null,
+                  remember : false
+                }
+              }];
+
+              membersResult = member;
+            }else{
+              member = {
+                id :id+1,
+                email : this.email,
+                name : this.name,
+                password : md5(this.password),
+                status : false,
+                setting : {
+                  ip : null,
+                  status : null,
+                  remember : false
+                }
+              };
+
+              membersResult[id] = member;
+            }
+
+            this.members = JSON.stringify(membersResult)
+            console.log(JSON.stringify(membersResult));
+            console.log(this.members);
+            $.ajax({
+              type:'DELETE',
+              url:'../json/member.json',
+              success: function(result){
+                console.log("success delete");
+                console.log(JSON.stringify(membersResult));
+                console.log(this.members);
+                $.ajax({
+                  data : {
+                    json : JSON.stringify(membersResult)
+                  },
+                  type:'PUT',
+                  url:'../json/member.json/',
+                  success: function(result){
+                    console.log("success add");
+                  }
+                })
+              }
+            })
+          }
+        }
+      }
+    },
+    validate : function (input) {
+        if($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+            if($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                return false;
+            }
+        }
+        else {
+            if($(input).val().trim() == ''){
+                return false;
+            }
+        }
+    },
+    validateEmail : function(){
+      if(this.email.match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null){
+        this.validateEmailResult = false
+        $('#emailValidation').addClass('alert-validate');
+      }else{
+        this.validateEmailResult = true
+        $('#emailValidation').removeClass('alert-validate');
+      }
+    },
+    showValidate : function (input){
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).addClass('alert-validate');
+    },
+    hideValidate : function (input){
+      var thisAlert = $(input).parent();
+
+      $(thisAlert).removeClass('alert-validate');
+    }
+  }
+});
+
 var formLogin = new Vue({
   el : '#formLogin',
   data : {
