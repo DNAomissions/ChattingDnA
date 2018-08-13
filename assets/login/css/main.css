@@ -453,7 +453,7 @@ iframe {
   content: attr(data-validate);
   position: absolute;
   max-width: 70%;
-  background-color: #fff;
+  background-color: rgba(255,255,255,1);
   border: 1px solid #c80000;
   border-radius: 2px;
   padding: 4px 25px 4px 10px;
@@ -490,7 +490,7 @@ iframe {
 
   display: block;
   position: absolute;
-  background-color: #fff;
+  background-color: rgba(255,255,255,1);
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
@@ -515,7 +515,7 @@ iframe {
 .alert-validate-success::before {
   position: absolute;
   max-width: 70%;
-  background-color: #fff;
+  background-color: rgba(255,255,255,1);
   border: 1px solid #00c800;
   border-radius: 2px;
   padding: 4px 25px 4px 10px;
@@ -552,7 +552,7 @@ iframe {
 
   display: block;
   position: absolute;
-  background-color: #fff;
+  background-color: rgba(255,255,255,1);
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
