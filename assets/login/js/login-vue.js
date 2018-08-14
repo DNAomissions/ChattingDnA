@@ -201,7 +201,7 @@ var formLogin = new Vue({
       )
     },
     authLogin : function(member){
-      Cookies.set('statusOnline','User Login');
+      Cookies.set('statusOnline-chatting-dna','User Login');
       if($('#remember').prop('checked') == true){
         Cookies.set("id-chatting-dna",member.id,{expires:90})
         Cookies.set("name-chatting-dna",member.name,{expires:90})
