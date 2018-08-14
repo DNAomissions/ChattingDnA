@@ -15,7 +15,7 @@ const LOGIN = path.join(__dirname, 'login.html');
 const MEMBER = path.join(__dirname, 'assets/json/member.json');
 
 router.use(function (req,res,next) {
-  console.log("/" + req.method);
+  console.log(req.method+" : "+req.url);
   next();
 })
 .use(bodyParser.urlencoded({ extended: false }))
@@ -67,10 +67,31 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);
+var countUser = 0;
+
+var userLogin = [];
 
 io.on('connection', (socket) => {
-  console.log('connected : '+socket.handshake.query['name']);
-  socket.on('disconnect', () => console.log('Client disconnected'));
+  socket.on('onlineUser',function(data){
+    countUser++;
+    userLogin.push(data.name);
+    io.sockets.emit('userListActive',{user : userLogin});
+    console.log("Online : "+data.name+" ("+data.status+")");
+    io.sockets.emit('userActive',{userActive : countUser});
+    console.log('connected : '+countUser);
+  });
+
+  socket.on('offlineUser',function(data){
+    countUser--;
+    userLogin = userLogin.filter(function(e) { return e !== data.name });
+    io.sockets.emit('userListActive',{user : userLogin});
+    console.log("Offline : "+data.name+" ("+data.status+")");
+    io.sockets.emit('userActive',{userActive : countUser});
+    console.log('connected : '+countUser);
+  });
+
+  socket.on('disconnect', () => {
+  });
 
   socket.on('chat message', function(msg){
     io.emit('chat message', {

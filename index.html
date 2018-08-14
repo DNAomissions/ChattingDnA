@@ -18,23 +18,23 @@
     <!-- My Style -->
       <link rel="stylesheet" href="index.css" />
   </head>
-  <body style="display:none">
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <body style="display:none" onpageshow="onlineUser();">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light" id="navbarVue">
       <a class="navbar-brand" href="#">RealTimeChat</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mr-auto">
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-             </a>
-             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-               <a class="dropdown-item" href="#" id="logoutButton"><i class="fas fa-fw fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
-             </div>
-           </li>
+            </a>
+            <div class="dropdown-menu dropdown-logout" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#" id="logoutButton"><i class="fas fa-fw fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>
@@ -42,6 +42,15 @@
     <div id="app">
       <ul class="chatResult d-flex flex-column" id="chatResult">
 
+      </ul>
+      <ul class="activeUserPanel d-flex flex-column">
+        <li class="activeUserCount">Active : <span class="badge badge-pills bg-success">{{usersOnline}}</span></li>
+        <li class="userPanelDivider"></li>
+        <li class="user-list">
+          <ul class="members-active d-flex flex-column" id="listMemberActive">
+            <li v-for="member in membersVue">{{member}}</li>
+          </ul>
+        </li>
       </ul>
       <form class="chat-box-field" v-on:submit.prevent="giveToSocket();">
         <div class="input-group">
@@ -92,8 +101,8 @@
         $('#logoutButton').click(function(e){
           e.preventDefault();
           Cookies.remove("id");
-          Cookies.remove("name");
           Cookies.remove("email");
+          Cookies.set('statusDocument','Logout')
           location.reload();
         });
       </script>

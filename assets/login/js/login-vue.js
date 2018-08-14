@@ -112,6 +112,7 @@ var formRegister = new Vue({
                     Cookies.set("id",auth.id)
                     Cookies.set("name",auth.name)
                     Cookies.set("email",auth.email)
+                    Cookies.set('statusOnline','New User Login');
                     location.reload()
                   }
                 })
@@ -200,6 +201,7 @@ var formLogin = new Vue({
       )
     },
     authLogin : function(member){
+      Cookies.set('statusOnline','User Login');
       if($('#remember').prop('checked') == true){
         Cookies.set("id",member.id,{expires:90})
         Cookies.set("name",member.name,{expires:90})
