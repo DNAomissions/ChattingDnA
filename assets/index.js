@@ -7,8 +7,6 @@ function saveText(text, filename){
   a.click()
 }
 
-var memberActive = Cookies.get();
-
 var navbarVue = new Vue({
   el : '#navbarVue',
   data : {
@@ -28,7 +26,7 @@ var app = new Vue({
     usersOnline : 0
   },
   mounted : function(){
-    this.from = memberActive.name
+    this.from = Cookies.get('name-chatting-dna')
   },
   methods : {
     giveToSocket : function(){
