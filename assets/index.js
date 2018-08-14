@@ -99,6 +99,7 @@ $(document).ready(function(){
       $('#chatResult').append(`<li class="wowload fadeIn row justify-content-end"><div class="speech-bubble-right"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;white-space: pre-wrap;word-break: keep-all;"><span class="sender-chat">Me</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat" style="float:right;">`+msg.time+`</span></pre></div></li>`);
     }else{
       $('#chatResult').append(`<li class="wowload fadeIn row justify-content-start"><div class="speech-bubble-left"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;white-space: pre-wrap;word-break: keep-all;"><span class="sender-chat">`+msg.from+`</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat" style="float:left;">`+msg.time+`</span></pre></div></li>`);
+      newMessageSound();
     }
     window.scrollTo(0, document.body.scrollHeight);
   });
@@ -108,6 +109,41 @@ $(document).ready(function(){
   });
 
   socket.on('userActive',function(data){
+    if(data.status == 'Online'){
+      if(data.name != Cookies.get('name-chatting-dna')){
+        onlineSound();
+      }
+    }
+
+    if(data.status == 'Offline'){
+      offlineSound();
+    }
+
     app.usersOnline = data.userActive;
   });
 });
+
+// Notification Sound
+
+function playSound(url){
+  var audio = document.createElement('audio');
+  audio.style.display = "none";
+  audio.src = url;
+  audio.autoplay = true;
+  audio.onended = function(){
+    audio.remove() //Remove when played.
+  };
+  document.body.appendChild(audio);
+}
+
+function onlineSound(){
+  playSound('notif-sound/open-ended.ogg');
+}
+
+function offlineSound(){
+  playSound('notif-sound/case-closed.ogg');
+}
+
+function newMessageSound(){
+  playSound('notif-sound/cheerful.ogg');
+}

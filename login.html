@@ -50,7 +50,7 @@
                     </span>
 
                     <div class="wrap-input100 validate-input" id="field-email-login" data-validate = "Valid email is: a@b.c">
-                        <input id="email" type="text" v-model="email" class="input100" name="email">
+                        <input id="email" type="text" @keyup="checkValue('email')" v-model="email" class="input100" name="email">
 
                         <span class="focus-input100" data-placeholder="Email"></span>
                     </div>
@@ -59,7 +59,7 @@
                         <span class="btn-show-pass" onclick="changeDisplay(this)">
                             <i class="fas fa-eye"></i>
                         </span>
-                        <input id="password" type="password" v-model="password" class="input100" name="password">
+                        <input id="password" type="password" @keyup="checkValue('password')" v-model="password" class="input100" name="password">
                         <span class="focus-input100" data-placeholder="Password"></span>
                     </div>
 
@@ -121,12 +121,12 @@
                         </span>
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter Name">
-                            <input id="name" type="text" class="input100" v-model="name" name="name" autofocus>
+                            <input id="name" type="text" @keyup="checkValue('name')" class="input100" v-model="name" name="name" autofocus>
                             <span class="focus-input100" data-placeholder="Name"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" id="emailValidation" data-validate = "Valid email is: a@b.c">
-                            <input id="email" type="text" class="input100" @keyup="validateEmail" v-model="email" name="email" autofocus>
+                            <input id="email" type="text" @keyup="checkValue('email')" class="input100" @keydown="validateEmail" v-model="email" name="email" autofocus>
                             <span class="focus-input100" data-placeholder="Email"></span>
                         </div>
 
@@ -134,12 +134,12 @@
                             <span class="btn-show-pass" onclick="changeDisplay(this)">
                                 <i class="fas fa-eye"></i>
                             </span>
-                            <input id="password" type="password" @keyup="validateCPassword" v-model="password" class="input100" name="password">
+                            <input id="password" type="password" @keyup="checkValue('password')" @keydown="validateCPassword" v-model="password" class="input100" name="password">
                             <span class="focus-input100" data-placeholder="Password"></span>
                         </div>
 
                         <div class="wrap-input100 validate-input" id="cpassword-validate" data-validate="Enter Confirm Password" data-validate-success="">
-                            <input id="password-confirm" type="password" @keyup="validateCPassword" v-model="passwordConfirm" class="input100" name="password_confirmation">
+                            <input id="password-confirm" type="password" @keyup="checkValue('password-confirm')" @keydown="validateCPassword" v-model="passwordConfirm" class="input100" name="password_confirmation">
 
                             <span class="focus-input100" data-placeholder="Confirm Password"></span>
                         </div>
@@ -183,9 +183,6 @@
           window.location = "../";
        }else{
           var members = $.getJSON("../json/member.json",function(result){
-            $.getJSON('https://ipapi.co/json/',function(ippublic){
-
-            });
             console.log('Success Read JSON');
             $('body').css('display','block');
           })

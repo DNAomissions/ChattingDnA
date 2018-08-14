@@ -153,6 +153,44 @@ var formRegister = new Vue({
       var thisAlert = $(input).parent();
 
       $(thisAlert).removeClass('alert-validate');
+    },
+    checkValue : function(object){
+      switch (object) {
+        case 'email':
+          if(this.email.trim() != "") {
+              $('#formRegister #email').addClass('has-val');
+          }
+          else {
+              $('#formRegister #email').removeClass('has-val');
+          }
+          break;
+        case 'password':
+          if(this.password.trim() != "") {
+              $('#formRegister #password').addClass('has-val');
+          }
+          else {
+              $('#formRegister #password').removeClass('has-val');
+          }
+          break;
+        case 'name':
+          if(this.name.trim() != "") {
+              $('#formRegister #name').addClass('has-val');
+          }
+          else {
+              $('#formRegister #name').removeClass('has-val');
+          }
+          break;
+        case 'password-confirm':
+          if(this.password-confirm.trim() != "") {
+              $('#formRegister #password-confirm').addClass('has-val');
+          }
+          else {
+              $('#formRegister #password-confirm').removeClass('has-val');
+          }
+          break;
+        default:
+
+      }
     }
   }
 });
@@ -213,6 +251,28 @@ var formLogin = new Vue({
         Cookies.set("name-chatting-dna",member.name)
         Cookies.set("email-chatting-dna",member.email)
         location.reload()
+      }
+    },
+    checkValue : function(object){
+      switch (object) {
+        case 'email':
+          if(this.email.trim() != "") {
+              $('#formLogin #email').addClass('has-val');
+          }
+          else {
+              $('#formLogin #email').removeClass('has-val');
+          }
+          break;
+        case 'password':
+          if(this.password.trim() != "") {
+              $('#formLogin #password').addClass('has-val');
+          }
+          else {
+              $('#formLogin #password').removeClass('has-val');
+          }
+          break;
+        default:
+
       }
     }
   }

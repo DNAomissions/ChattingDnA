@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
     userLogin.push(data.name);
     io.sockets.emit('userListActive',{user : userLogin});
     console.log("Online : "+data.name+" ("+data.status+")");
-    io.sockets.emit('userActive',{userActive : countUser});
+    io.sockets.emit('userActive',{userActive : countUser, status : 'Online',name : data.name});
     console.log('connected : '+countUser);
   });
 
@@ -87,7 +87,7 @@ io.on('connection', (socket) => {
     userLogin.splice(index,1);
     io.sockets.emit('userListActive',{user : userLogin});
     console.log("Offline : "+data.name+" ("+data.status+")");
-    io.sockets.emit('userActive',{userActive : countUser});
+    io.sockets.emit('userActive',{userActive : countUser, status : 'Offline',name : data.name});
     console.log('connected : '+countUser);
   });
 

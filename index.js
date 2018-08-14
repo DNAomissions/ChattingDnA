@@ -1,11 +1,37 @@
 var socket = io.connect(window.location.protocol+'//'+window.location.hostname+':3000',{ query: "name="+Cookies.get("name") });
 
+// Notification Sound
+
+function playSound(url){
+  var audio = document.createElement('audio');
+  audio.style.display = "none";
+  audio.src = url;
+  audio.autoplay = true;
+  audio.onended = function(){
+    audio.remove() //Remove when played.
+  };
+  document.body.appendChild(audio);
+}
+
+function onlineSound(){
+  playSound('notif-sound/cheerful.ogg');
+}
+
+function offlineSound(){
+  playSound('notif-sound/case-closed.ogg');
+}
+
+function newMessageSound(){
+  playSound('notif-sound/open-ended.ogg');
+}
+
 $(document).ready(function(){
   socket.on('chat message', function(msg){
     if(msg.from == Cookies.get("name")){
       $('#chatResult').append(`<li class="wowload fadeIn speech-bubble-right"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;"><span class="sender-chat">`+msg.from+`</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat">`+msg.time+`</span></pre></li>`);
     }else{
       $('#chatResult').append(`<li class="wowload fadeIn speech-bubble-left"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;"><span class="sender-chat">`+msg.from+`</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat">`+msg.time+`</span></pre></li>`);
+      newMessageSound();
     }
     window.scrollTo(0, document.body.scrollHeight);
   });
