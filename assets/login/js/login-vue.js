@@ -109,10 +109,10 @@ var formRegister = new Vue({
                   type:'PUT',
                   url:'../json/member.json/',
                   success: function(result){
-                    Cookies.set("id",auth.id)
-                    Cookies.set("name",auth.name)
-                    Cookies.set("email",auth.email)
-                    Cookies.set('statusOnline','New User Login');
+                    Cookies.set("id-chatting-dna",auth.id)
+                    Cookies.set("name-chatting-dna",auth.name)
+                    Cookies.set("email-chatting-dna",auth.email)
+                    Cookies.set('statusOnline-chatting-dna','New User Login');
                     location.reload()
                   }
                 })
@@ -203,14 +203,14 @@ var formLogin = new Vue({
     authLogin : function(member){
       Cookies.set('statusOnline','User Login');
       if($('#remember').prop('checked') == true){
-        Cookies.set("id",member.id,{expires:90})
-        Cookies.set("name",member.name,{expires:90})
-        Cookies.set("email",member.email,{expires:90})
+        Cookies.set("id-chatting-dna",member.id,{expires:90})
+        Cookies.set("name-chatting-dna",member.name,{expires:90})
+        Cookies.set("email-chatting-dna",member.email,{expires:90})
         location.reload()
       }else{
-        Cookies.set("id",member.id)
-        Cookies.set("name",member.name)
-        Cookies.set("email",member.email)
+        Cookies.set("id-chatting-dna",member.id)
+        Cookies.set("name-chatting-dna",member.name)
+        Cookies.set("email-chatting-dna",member.email)
         location.reload()
       }
     }

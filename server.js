@@ -83,7 +83,8 @@ io.on('connection', (socket) => {
 
   socket.on('offlineUser',function(data){
     countUser--;
-    userLogin = userLogin.filter(function(e) { return e !== data.name });
+    var index = userLogin.indexOf(data.name);
+    userLogin.splice(index,1);
     io.sockets.emit('userListActive',{user : userLogin});
     console.log("Offline : "+data.name+" ("+data.status+")");
     io.sockets.emit('userActive',{userActive : countUser});

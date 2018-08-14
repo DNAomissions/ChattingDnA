@@ -90,7 +90,7 @@
       <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
       <script src="index.js" charset="utf-8"></script>
       <script type="text/javascript">
-        if(Cookies.get("id") == null && Cookies.get("name") == null && Cookies.get("email") == null){
+        if(Cookies.get("id-chatting-dna") == null && Cookies.get("name-chatting-dna") == null && Cookies.get("email-chatting-dna") == null){
           window.location = "login";
         }else{
           $('body').css('display','block');
@@ -100,9 +100,9 @@
         // logoutAuth
         $('#logoutButton').click(function(e){
           e.preventDefault();
-          Cookies.remove("id");
-          Cookies.remove("email");
-          Cookies.set('statusDocument','Logout')
+          Cookies.remove("id-chatting-dna");
+          Cookies.remove("email-chatting-dna");
+          Cookies.set('statusDocument-chatting-dna','Logout')
           location.reload();
         });
       </script>

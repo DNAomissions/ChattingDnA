@@ -179,7 +179,7 @@
       <!-- Module JS Login -->
        <script src="../login/js/main.js" charset="utf-8"></script>
        <script type="text/javascript">
-       if(Cookies.get("id") != null && Cookies.get("name") != null && Cookies.get("email") != null){
+       if(Cookies.get("id-chatting-dna") != null && Cookies.get("name-chatting-dna") != null && Cookies.get("email-chatting-dna") != null){
           window.location = "../";
        }else{
           var members = $.getJSON("../json/member.json",function(result){

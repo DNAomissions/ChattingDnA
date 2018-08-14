@@ -55,9 +55,9 @@ var app = new Vue({
       this.chatText = this.chatText+`\t`
     },
     logoutAuth : function(){
-      Cookies.remove("id")
-      Cookies.remove("name")
-      Cookies.remove("email")
+      Cookies.remove("id-chatting-dna")
+      Cookies.remove("name-chatting-dna")
+      Cookies.remove("email-chatting-dna")
       location.reload()
     }
   }
@@ -65,8 +65,8 @@ var app = new Vue({
 
 function onlineUser(){
   socket.emit('onlineUser',{
-    name : Cookies.get("name"),
-    status : Cookies.get('statusOnline')
+    name : Cookies.get("name-chatting-dna"),
+    status : Cookies.get('statusOnline-chatting-dna')
   });
   Cookies.remove('statusOnline');
 };
@@ -77,27 +77,27 @@ $(window).on('beforeunload',function(){
   var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
   var s = (d.getSeconds()<10?'0':'') + d.getSeconds();
   var time = h+':'+m+':'+s;
-  if(Cookies.get('statusDocument') == 'Logout'){
+  if(Cookies.get('statusDocument-chatting-dna') == 'Logout'){
     socket.emit('offlineUser',{
-      name : Cookies.get('name'),
+      name : Cookies.get('name-chatting-dna'),
       status : 'Logout',
       time : time
     });
-    Cookies.remove('name');
-    Cookies.remove('statusDocument')
+    Cookies.remove('name-chatting-dna');
+    Cookies.remove('statusDocument-chatting-dna')
   }else{
     socket.emit('offlineUser',{
-      name : Cookies.get('name'),
+      name : Cookies.get('name-chatting-dna'),
       status : 'Close/Refresh',
       time : time
     });
-    Cookies.set('statusOnline','Re-Login');
+    Cookies.set('statusOnline-chatting-dna','Re-Login');
   }
 });
 
 $(document).ready(function(){
   socket.on('chat message', function(msg){
-    if(msg.from == Cookies.get("name")){
+    if(msg.from == Cookies.get("name-chatting-dna")){
       $('#chatResult').append(`<li class="wowload fadeIn row justify-content-end"><div class="speech-bubble-right"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;white-space: pre-wrap;word-break: keep-all;"><span class="sender-chat">Me</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat" style="float:right;">`+msg.time+`</span></pre></div></li>`);
     }else{
       $('#chatResult').append(`<li class="wowload fadeIn row justify-content-start"><div class="speech-bubble-left"><pre style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';font-size: 1rem;font-weight: 400;  line-height: 1.5;color: #212529;text-align: left;white-space: pre-wrap;word-break: keep-all;"><span class="sender-chat">`+msg.from+`</span><br><span class="divider-chat-bubble"></span><p class="message-chat">`+msg.message+`</p><span class="time-chat" style="float:left;">`+msg.time+`</span></pre></div></li>`);
