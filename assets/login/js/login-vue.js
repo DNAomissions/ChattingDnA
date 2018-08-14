@@ -97,7 +97,7 @@ var formRegister = new Vue({
               membersResult[id] = member;
             }
 
-            this.members = JSON.stringify(membersResult.replace("\\",''))
+            this.members = JSON.stringify(membersResult).replace("\\",'')
             $.ajax({
               type:'DELETE',
               url:'../json/member.json',
