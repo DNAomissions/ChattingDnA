@@ -36,6 +36,7 @@ var formRegister = new Vue({
     },
     registerMembers : function(){
       if(this.validateConfirm == true){
+        $('body').css('display','none');
         var inputR = $('#formRegister .validate-input .input100');
         var check = true;
 
