@@ -35,6 +35,7 @@ var formRegister = new Vue({
       }
     },
     registerMembers : function(){
+      $('body').css('display','none')
       if(this.validateConfirm == true){
         var inputR = $('#formRegister .validate-input .input100');
         var check = true;
@@ -97,7 +98,7 @@ var formRegister = new Vue({
               membersResult[id] = member;
             }
 
-            this.members = JSON.stringify(membersResult)
+            this.members = JSON.stringify(membersResult.replace("\\",''))
             $.ajax({
               type:'DELETE',
               url:'../json/member.json',
